@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1eyrVmgpnFPIx6jL3R5-Goj5iobWI-gGK
 
 # Convolutions in CRISPR on-target
-Below you will find the third excercise.
+Below you will find the third exercise.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/colabtools/blob/main/2023/CRISPR/exercise/crispr_2023_crispr_exercise3.ipynb)
 
@@ -31,7 +31,7 @@ import subprocess
 import os
 
 from tensorflow.keras import models, callbacks, Model, Input, utils, metrics
-from tensorflow.keras.layers import Conv1D, Dropout, AveragePooling1D, Flatten, Dense, concatenate, SpatialDropout1D
+from tensorflow.keras.layers import Conv1D, Dropout, Flatten, Dense, concatenate
 
 eLENGTH30 = 30
 eDEPTH = 4
@@ -83,8 +83,8 @@ def preprocess_seq(data, mask=None, use_dgb=True):
 print("Definitions executed")
 
 #commands run to download data
-! curl -o training_data.pickle https://rth.dk/~anthon/CRISPRsummerschool/2023/CRISPR/exercise/training_data.pickle
-! curl -o validation_data.pickle https://rth.dk/~anthon/CRISPRsummerschool/2023/CRISPR/exercise/validation_data.pickle
+! curl -o training_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/training_data.pickle
+! curl -o validation_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/validation_data.pickle
 
 # Training Data
 PATH = './'
@@ -99,7 +99,6 @@ print('Data loaded')
 OPT = 'adam' #use the ADAM optizer
 LOSS = 'mse' #loss function is mean squared error
 
-DROPOUT_CNV = 0.0
 DROPOUT_DENSE = 0.3
 
 
@@ -163,7 +162,7 @@ print('Model defined')
 #Validation data preprocess
 (x30v, gv, yv) = preprocess_seq(dv)
 
-"""## Excercise 3.1 Model definition and convolutions
+"""## Exercise 3.1 Model definition and convolutions
 Look at the model summary in the output above.
 
 What is the dimensions (shape) of the output of the convolutional layer?
@@ -185,7 +184,7 @@ OPT = 'adam' #use the ADAM optizer
 LEARN = 1e-4 #learning rate
 EPOCHS = 200 #maximum number of Epochs
 LOSS = 'mse' #loss function is mean squared error
-BATCH_SIZE = 64 #batch size for the traing
+BATCH_SIZE = 64 #batch size for the training
 
 
 #early stopping is a way to control for overfitting and save the best model
@@ -241,9 +240,9 @@ Apply the convolutional layer on the first ontarget sequence (```x30_0```) and e
 
 What is the output dimensions (shape)?
 
-Identify the array which is the result of applying the first convolution?
+Identify the array which is the resulting from applying the first of the 10 convolutions?
 
-
+In the output you will see only positive numbers and a lot of zeroes. Why is that, when the convolutions may have both positive and negative weights?
 """
 
 #answer
@@ -256,12 +255,10 @@ w = [np.array([
     [[ 0.5], [ 0.0], [ 0.0], [ 0.0]],
     [[ 0.0], [ 0.0], [ 0.0], [ 0.0]]])]
 print(w[0].transpose())
-#define a simple convolutional layer with just one convolution of size 3
-conv_simple_1_3 = tf.keras.layers.Conv1D(1, 3, use_bias=False, input_shape=(30,4))
-#set the weights using the array defined above
-conv_simple_1_3.set_weights(w)
+#define a simple convolutional layer with just one convolution of size 3 with the w as the weights
+conv_simple_1_3 = tf.keras.layers.Conv1D(1, 3, use_bias=False, weights=w, input_shape=(30,4))
 
-"""### Excercise 3.4.2
+"""### Exercise 3.4.2
 Apply the simple convolution defined above on the first ontarget ```(x30_0)``` and relate the result to the input sequence of the first ontarget?
 
 Convolutions are sometimes called filters. How does your observation of the result of the convolution match up with that?

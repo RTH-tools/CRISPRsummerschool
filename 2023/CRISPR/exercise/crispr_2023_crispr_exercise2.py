@@ -7,14 +7,14 @@ Original file is located at
     https://colab.research.google.com/drive/1co94CpmIvCkz4m9EU8aA5rKaQCTWGmrN
 
 # Extracting features from the deep learning results
-Below you will find the second excercise.
+Below you will find the second exercise.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/colabtools/blob/main/2023/CRISPR/exercise/crispr_2023_crispr_exercise2.ipynb)
 
 Deep learning does not easily lend itself to extraction of feature importance, like in the example of CRISPR where one could wish to know the importance of *e.g.* the first nucleotide of the NGG pam for the efficiency of the guide. In this exercise we will look at a way around this problem by masking out parts of the input sequence or of the energy parameter from the model input.
 
 ## basic code definitions
-Eter the cell below and press play or Ctrl+Enter in the block below to execute. You should see the message "Definitions executed" printed after execution.
+Enter the cell below and press play or Ctrl+Enter in the block below to execute. You should see the message "Definitions executed" printed after execution.
 """
 
 #!/usr/bin/env python3
@@ -29,9 +29,7 @@ import subprocess
 import os
 
 from tensorflow.keras import models, callbacks, Model, Input, utils, metrics
-from tensorflow.keras.layers import Conv1D, Dropout, AveragePooling1D, Flatten, Dense, concatenate, SpatialDropout1D
-
-print(os.getcwd())
+from tensorflow.keras.layers import Conv1D, Dropout, Flatten, Dense, concatenate
 
 eLENGTH30 = 30
 eDEPTH = 4
@@ -81,8 +79,8 @@ def preprocess_seq(data, mask=None, use_dgb=True):
     return (DATA_X30, DATA_G, DATA_Y)
 
 #commands run to download data
-! curl -o training_data.pickle https://rth.dk/~anthon/CRISPRsummerschool/2023/CRISPR/exercise/training_data.pickle
-! curl -o validation_data.pickle https://rth.dk/~anthon/CRISPRsummerschool/2023/CRISPR/exercise/validation_data.pickle
+! curl -o training_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/training_data.pickle
+! curl -o validation_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/validation_data.pickle
 
 
 # Training Data
@@ -95,15 +93,23 @@ with open(PATH+'/validation_data.pickle', 'rb') as f:
     dv = pickle.load(f)
 
 print('Data loaded')
+
+"""##Model definition and baseline performance (5-10 minutes)
+
+---
+
+
+In the code below, we will re-use the simplified version of the CRISPRon ontarget model we created in the previous exercise, but we will preprocess the data in different ways, by masking out information from the input in order to glean its relative importance.
+"""
+
 OPT = 'adam' #use the ADAM optizer
 LOSS = 'mse' #loss function is mean squared error
 
-DROPOUT_CNV = 0.1
 DROPOUT_DENSE = 0.3
 
 
 CONV_1_SIZE = 3
-N_CONV_1 = 20
+N_CONV_1 = 40
 N_DENSE = 40
 N_OUT = 40
 
@@ -156,15 +162,8 @@ model.compile(loss=LOSS, optimizer=OPT, metrics=['mae', 'mse'])
 
 print('Model defined')
 
-"""##Model definition and baseline performance (5-10 minutes)
-
----
-
-
-In the code below, we will re-use the simplified version of the CRISPRon ontarget model we created in the previous exercise, but we will preprocess the data in different ways, by masking out information from the input in order to glean its relative importance.
-
-###Preprocessing
-First we preprocess the data in the same way as for exercise 1
+"""###Preprocessing
+First we preprocess the data in the same way as for exercise 1 and execute the model **training** to initialize weights for later use. Check that you get more or less the same result as in exercise 1 (mse in the range of 160-162 on the validation data).
 """
 
 #training data preprocess
@@ -172,7 +171,7 @@ First we preprocess the data in the same way as for exercise 1
 #Validation data preprocess
 (x30v, gv, yv) = preprocess_seq(dv)
 
-"""And execute the model **training** to initialize weights for later use. Check that you get more or less the same result as in exercise 1."""
+print(x30[0], g[0], y[0])
 
 print("training...")
 
@@ -180,7 +179,7 @@ OPT = 'adam' #use the ADAM optizer
 LEARN = 1e-4 #learning rate
 EPOCHS = 200 #maximum number of Epochs
 LOSS = 'mse' #loss function is mean squared error
-BATCH_SIZE = 64 #batch size for the traing
+BATCH_SIZE = 64 #batch size for the training
 
 
 #early stopping is a way to control for overfitting and save the best model
@@ -247,6 +246,7 @@ print(x30[0], g[0], y[0])
 
 #restore the initial weights
 if os.path.exists('model_30.init.h5'):
+  print('weights loaded')
   model.load_weights('model_30.init.h5')
 else:
   #did you forget to train the the baseline model above?
@@ -267,8 +267,8 @@ print("done")
 print("evaulating validation data using best model weights")
 model.evaluate((x30v,gv), yv)
 
-"""### Excercise 2.1.1
-Modify the code above to run the model without the energy parameter DGb.
+"""### Exercise 2.1.1
+Modify the code above to run the model without the energy parameter DGb and repeat the training 3-5 times.
 
 What is the effect on the performance?
 
@@ -278,7 +278,7 @@ Is that effect smaller or larger than what is observed for the full model (mse 1
 
 #answer
 
-"""### Excercise 2.1.2
+"""### Exercise 2.1.2
 Modify the code above to mask out part of the ontarget sequence.
 
 What is the effect of masking out the GG of the NGG PAM?
