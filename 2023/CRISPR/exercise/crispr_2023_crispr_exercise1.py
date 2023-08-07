@@ -9,7 +9,7 @@ Original file is located at
 # Warming up exercise
 Below you will find the first exercise, in which you will be introduced a small CRISPR on-target model in Tensorflow / Keras and use it to train a small ontarget efficiency model on real data.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/colabtools/blob/main/2023/CRISPR/exercise/crispr_2023_crispr_exercise1.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/RTH-tools/blob/main/2023/CRISPR/exercise/crispr_2023_crispr_exercise1.ipynb)
 
 ## basic code definitions
 Enter the cell below and press play or Ctrl+Enter in the block below to execute. You should see the message "Definitions executed" printed after execution. (<5 minutes)

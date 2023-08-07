@@ -9,7 +9,7 @@ Original file is located at
 # Convolutions in CRISPR on-target
 Below you will find the third exercise.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/colabtools/blob/main/2023/CRISPR/exercise/crispr_2023_crispr_exercise3.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/RTH-tools/blob/main/2023/CRISPR/exercise/crispr_2023_crispr_exercise3.ipynb)
 
 In this exercise we will take a look at what are the actual outcome of the convolutions of the on-target sequence in the deep learning model.
 
