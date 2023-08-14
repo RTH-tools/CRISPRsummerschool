@@ -79,6 +79,7 @@ def preprocess_seq(data, mask=None, use_dgb=True):
     return (DATA_X30, DATA_G, DATA_Y)
 
 #commands run to download data
+#You may need to change the URL to a suitable one outside of github due to ratelimits
 ! curl -o training_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/training_data.pickle
 ! curl -o validation_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/validation_data.pickle
 
