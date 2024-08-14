@@ -22,3 +22,15 @@ In this exercise we will take a look at what are the actual outcome of the convo
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2024/CRISPR/exercise/crispr_2024_crispr_exercise3.ipynb)
 
+## Exercise 4: A better model?
+
+Create a machine learning model to replace the simple model used in these exercises. The only conditions are
+
+1. Replace the one-hot encoding with an embedding layer
+2. Do not use any convolutional layers
+3. It should me trainable in less than approximately 5 minutes
+
+This can not be completed by anyone but an expert in the given time, so feel
+free to use your favorite Python code generating LLM. You could for example try with
+a bidirectional LSTM model. Can you make a model that performs better on the
+provided test (validation) data?
