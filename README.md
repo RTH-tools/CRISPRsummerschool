@@ -12,7 +12,7 @@ Deep learning does not easily lend itself to extraction of feature importance, l
 
 [[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2024/CRISPR/exercise/crispr_2024_crispr_exercise2.py)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2024/CRISPR/exercise/crispr_2024_crispr_exercise2.pynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2024/CRISPR/exercise/crispr_2024_crispr_exercise2.ipynb)
 
 
 ## Exercise 3: Convolutions in CRISPR on-target
