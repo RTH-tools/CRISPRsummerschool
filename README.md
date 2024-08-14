@@ -33,4 +33,4 @@ Create a machine learning model to replace the simple model used in these exerci
 This can not be completed by anyone but an expert in the given time, so feel
 free to use your favorite Python code generating LLM. You could for example try with
 a bidirectional LSTM model. Can you make a model that performs better on the
-provided test (validation) data?
+provided test (validation) data than the model built in Exercise 1?
