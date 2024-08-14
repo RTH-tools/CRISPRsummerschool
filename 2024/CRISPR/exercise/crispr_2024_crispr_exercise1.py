@@ -18,7 +18,6 @@ Enter the cell below and press play or Ctrl+Enter in the block below to execute.
 """
 
 #!/usr/bin/env python3
-from google.colab import drive
 from random import randint
 import tensorflow as tf
 import tensorflow.keras as keras
@@ -27,6 +26,7 @@ import pickle
 import urllib3
 import subprocess
 import os
+import pandas
 
 from tensorflow.keras import models, callbacks, Model, Input, utils, metrics
 from tensorflow.keras.layers import Conv1D, Dropout, Flatten, Dense, concatenate
@@ -66,15 +66,14 @@ def preprocess_seq(data):
     DATA_Y = np.zeros((len(data)), dtype=np.float32)  # efficiency
 
     for l, d in enumerate(data):
-        set_data(DATA_X30[l], d[0])
-        DATA_G[l] = -d[1]
-        DATA_Y[l] = d[2]
+        print(l, d)
+        set_data(DATA_X30[l], d[1])
+        DATA_G[l] = -d[2]
+        DATA_Y[l] = d[3]
     return (DATA_X30, DATA_G, DATA_Y)
 #commands run to download data
-#You may need to change the URL to a suitable one outside of github due to ratelimits
-! curl -o training_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/training_data.pickle
-! curl -o validation_data.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/validation_data.pickle
-print('\n\nDefinitions executed')
+! curl -o validation.csv https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/validation_data.csv
+! curl -o validation.pickle https://github.com/RTH-tools/CRISPRsummerschool/raw/main/2023/CRISPR/exercise/validation_data.csv
 
 """## Exercise 1.1 (<5minutes)
 The sequence of the ontarget of an example gRNA (ACTGAAAAAACCCCCTTTTT), needs to be onehot encoded. An example ontarget of ACTGAAAAAACCCCCTTTTT is TTTTACTGAAAAAACCCCCTTTTTGGGAAA, which includes a four nucleotide prefix, the ontarget to the gRNA, the PAM sequnce and a four nucleotide suffix.
@@ -96,20 +95,21 @@ Excecute the code below to load the data into the notebook."""
 # g - deltaGb
 # y - the efficiency value [0-100] )
 
+print("loading data")
+
 # Training Data
 PATH = './'
-with open(PATH+'/training_data.pickle', 'rb') as f:
-    d = pickle.load(f)
+d = pandas.read_csv(PATH + 'training_data.csv').values.tolist()
 (x30, g, y) = preprocess_seq(d)
 
 #Validation data read
-with open(PATH+'/validation_data.pickle', 'rb') as f:
-    dv = pickle.load(f)
+dv = pandas.read_csv(PATH + 'validation_data.csv').values.tolist()
 (x30v, gv, yv) = preprocess_seq(dv)
 
 """### Exercise 1.2.1  (<5 minutes)
 Get the first value of the raw unprocessed training data (d[0]) and the first values of the processed data (x30, g, y). Is this what you expected for the onehot encoding?
 """
+print("done loading data")
 
 #answer
 
