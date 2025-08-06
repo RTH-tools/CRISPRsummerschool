@@ -18,8 +18,8 @@ from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Embedding, Bidirectional, LSTM, SimpleRNN, Dense, Dropout, Input, Attention, Add
 from tensorflow.keras.optimizers import Adam
 
-! [[ -e training_data.csv ]] || curl -o training_data.csv https://rth.dk/internal/index.php/s/hJ45ZdUExZyZ6xe/download
-! [[ -e validation_data.csv ]] || curl -o validation_data.csv https://rth.dk/internal/index.php/s/lhufyeBtc8BA3K8/download
+! [[ -e training_data.csv ]] || curl -o training_data.csv https://rth.dk/internal/index.php/s/ypWRwznx6fXFjZN/download
+! [[ -e validation_data.csv ]] || curl -o validation_data.csv https://rth.dk/internal/index.php/s/KR9opRTe8EkXNyi/download
 
 # Example sequence-to-integer mapping
 def encode_sequence(seq):

@@ -94,8 +94,8 @@ print("Definitions executed")
 
 #commands run to download data
 #You may need to change the URL to a suitable one outside of github due to ratelimits
-! [[ -e training_data.csv ]] || curl -o training_data.csv https://rth.dk/internal/index.php/s/hJ45ZdUExZyZ6xe/download
-! [[ -e validation_data.csv ]] || curl -o validation_data.csv https://rth.dk/internal/index.php/s/lhufyeBtc8BA3K8/download
+! [[ -e training_data.csv ]] || curl -o training_data.csv https://rth.dk/internal/index.php/s/ypWRwznx6fXFjZN/download
+! [[ -e validation_data.csv ]] || curl -o validation_data.csv https://rth.dk/internal/index.php/s/KR9opRTe8EkXNyi/download
 
 # Training Data
 PATH = './'
