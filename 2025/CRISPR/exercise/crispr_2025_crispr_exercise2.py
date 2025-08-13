@@ -87,8 +87,8 @@ def preprocess_seq(data, mask=None, use_dgb=True):
 
 #commands run to download data
 #You may need to change the URL to a suitable one outside of github due to ratelimits
-! [[ -e training_data.csv ]] || curl -o training_data.csv https://rth.dk/internal/index.php/s/ypWRwznx6fXFjZN/download
-! [[ -e validation_data.csv ]] || curl -o validation_data.csv https://rth.dk/internal/index.php/s/KR9opRTe8EkXNyi/download
+! [[ -e training_data.csv ]] || curl -o training_data.csv https://rth.dk/internal/index.php/s/oF43QXcsLPn7nRL/download
+! [[ -e validation_data.csv ]] || curl -o validation_data.csv https://rth.dk/internal/index.php/s/kdiXC3XaHLxpwwJ/download
 
 
 # Training Data
