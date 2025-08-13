@@ -27,6 +27,7 @@ Enter the cell below and press play or Ctrl+Enter in the block below to execute.
 #!/usr/bin/env python3
 from google.colab import drive
 from random import randint
+import pandas
 import tensorflow as tf
 import tensorflow.keras as keras
 import numpy as np
