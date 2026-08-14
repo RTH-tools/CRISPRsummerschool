@@ -33,11 +33,12 @@ That separates two kinds of uncertainty: **aleatoric**, the noise inherent in th
 
 ## Running on Google Colab
 
-Follow these steps before running the notebooks:
+The Google Colab links above open a temporary session that does not autosave. Before anything, save your own copy and enable the GPU. Note that re-clicking a link always reopens the original.
 
-1. **Runtime → Change runtime type**
-2. **Hardware accelerator → T4 GPU**
-3. **Save** (the session restarts)
+1. **File → Save a copy in Drive**
+2. **Runtime → Change runtime type**
+3. **Hardware accelerator → T4 GPU**
+4. **Save** (the session restarts)
 
 Confirm it worked: run the first cell and read the device it prints.
 
