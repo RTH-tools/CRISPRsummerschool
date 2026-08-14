@@ -1,36 +1,47 @@
-# CRISPRsummerschool 2025
+# CRISPRsummerschool 2026
 
-## Exercise 1: Warming up exercise
-Introduction to small CRISPR on-target model in Tensorflow / Keras and use it to train a small ontarget efficiency model on real data.
+## Exercise 1: Introduction
+Introduction to a small CRISPR on-target model in PyTorch and use it to train a small ontarget efficiency model on real data. One-hot encoding, mini-batches and epochs, early stopping, and evaluation on validation data. The solutions will be available after the class.
 
-[[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2025/CRISPR/exercise/crispr_2025_crispr_exercise1.py)
+[[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise1.ipynb)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2025/CRISPR/exercise/crispr_2025_crispr_exercise1.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise1.ipynb)
 
 ## Exercise 2: Extracting features from deep learning
 Deep learning does not easily lend itself to extraction of feature importance, like in the example of CRISPR where one could wish to know the importance of e.g. the first nucleotide of the NGG pam for the efficiency of the guide. In this exercise we will look at a way around this problem by masking out parts of the input sequence or of the energy parameter from the model input.
 
-[[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2025/CRISPR/exercise/crispr_2025_crispr_exercise2.py)
+[[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise2.ipynb)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2025/CRISPR/exercise/crispr_2025_crispr_exercise2.ipynb)
-
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise2.ipynb)
 
 ## Exercise 3: Convolutions in CRISPR on-target
-In this exercise we will take a look at what are the actual outcome of the convolutions of the on-target sequence in the deep learning model.
+In this exercise we will take a look at what are the actual outcome of the convolutions of the on-target sequence in the deep learning model. We inspect the shape of the convolution output, print the learned filter weights, and apply a hand-set filter of our own to see what a single convolution responds to.
 
-[[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2025/CRISPR/exercise/crispr_2025_crispr_exercise3.py)
+[[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise3.ipynb)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2025/CRISPR/exercise/crispr_2025_crispr_exercise3.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise3.ipynb)
 
-## Exercise 4: A better model?
+## Exercise 4: CRISPRon with uncertainty estimation
+A model that outputs a single number hides something important: how sure is it? Two guides can both be predicted at 63% efficiency, yet the model may be confident about one and essentially guessing about the other, i.e. uncertain. In this exercise we change the output head so that the model predicts a mean and a variance, train it with the Gaussian negative log-likelihood instead of the mean squared error, and add a five-member deep ensemble.
 
-Create a machine learning model to replace the simple model used in these exercises. The only conditions are
+That separates two kinds of uncertainty: **aleatoric**, the noise inherent in the data, which more data does not remove, and **epistemic**, the model's own ignorance about guides unlike anything it was trained on, which more data does help. We then ask the harder question - whether the reported uncertainty can be trusted - by checking whether it tracks the actual error and whether it is calibrated.
 
-1. Replace the one-hot encoding with an embedding layer
-2. Do not use any convolutional layers
-3. It should me trainable in less than approximately 5 minutes
+[[Open In GitHub]](https://github.com/RTH-tools/CRISPRsummerschool/tree/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise4.ipynb)
 
-This can not be completed by anyone but an expert in the given time, so feel
-free to use your favorite Python code generating LLM. You could for example try with
-a bidirectional LSTM model. Can you make a model that performs better on the
-provided test (validation) data than the model built in Exercise 1?
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RTH-tools/CRISPRsummerschool/blob/main/2026/CRISPR/exercise/crispr_2026_crispr_exercise4.ipynb)
+
+
+## Running on Google Colab
+
+Follow these steps before running the notebooks:
+
+1. **Runtime → Change runtime type**
+2. **Hardware accelerator → T4 GPU**
+3. **Save** (the session restarts)
+
+Confirm it worked: run the first cell and read the device it prints.
+
+```
+Using device: cuda      <- GPU active
+Using device: cpu       <- still on CPU
+```
