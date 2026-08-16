@@ -1,4 +1,5 @@
-# CRISPRsummerschool 2026
+# 4th Summer School in Applied Deep Learning in Bioinformatics | 2026 | ML Exercises
+
 
 ## Exercise 1: Introduction
 Introduction to a small CRISPR on-target model in PyTorch and use it to train a small ontarget efficiency model on real data. One-hot encoding, mini-batches and epochs, early stopping, and evaluation on validation data. The solutions will be available after the class.
